@@ -1,0 +1,14 @@
+% python, scripts
+
+# Payermax Cashout Script
+cat << 'EOD' | pbcopy
+from liveapp.payermax import client
+from liveapp.payermax.types import PayermaxPayoutRequest
+from liveapp.payermax.types import PayermaxDisbursementServiceEnv
+from liveapp.payermax.types import PayermaxServiceEnv
+from liveapp.payermax.client import get_payermax
+
+request = PayermaxPayoutRequest(amount=14.17, currency="JOD", countryCode="JO", orderId="afe24c1688164956bfd60e6bab8783ab", payeeAccount="JO94CBJO0010000000000131000302", payeeName="hasan, ahmet", payType=None, passBackParams="1193", transactionNote="1193", address="test address", paymentMethodType="BANK_TRANSFER", targetOrg="CENTRAL_JORDAN")
+disbursement_service = PayermaxDisbursementServiceEnv.service("JOD")
+client = get_payermax(PayermaxServiceEnv.DISBURSEMENT, disbursement_service_env=disbursement_service)
+client.create_cashout(request)
