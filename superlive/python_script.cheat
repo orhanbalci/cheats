@@ -12,3 +12,4 @@ request = PayermaxPayoutRequest(amount=14.17, currency="JOD", countryCode="JO", 
 disbursement_service = PayermaxDisbursementServiceEnv.service("JOD")
 client = get_payermax(PayermaxServiceEnv.DISBURSEMENT, disbursement_service_env=disbursement_service)
 client.create_cashout(request)
+EOD
