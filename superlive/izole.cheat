@@ -1,6 +1,12 @@
-% superlive, izole, python
+% superlive, izole
 
 # Execute Django shell in pod (interactive namespace and pod selection)
 kubectl -n <namespace> exec -it <pod> -- python manage.py shell
 $ namespace: kubectl get namespaces -o custom-columns=":metadata.name" --no-headers | fzf --height=10 --border --prompt="Select namespace: "
 $ pod: kubectl get pods -n <namespace> -o custom-columns=":metadata.name" --no-headers | fzf --height=10 --border --prompt="Select pod: "
+
+# Connect to mysql in pod
+kubectl exec -it <pod_name> -n <namespace> -- mysql -uroot -p
+
+$ pod_name: kubectl get pods -n <namespace> | grep mysql | awk '{print $1}'
+$ namespace: kubectl get namespaces | tail -n +2 | awk '{print $1}'
