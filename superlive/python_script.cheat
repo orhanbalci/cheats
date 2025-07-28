@@ -13,3 +13,16 @@ disbursement_service = PayermaxDisbursementServiceEnv.service("JOD")
 client = get_payermax(PayermaxServiceEnv.DISBURSEMENT, disbursement_service_env=disbursement_service)
 client.create_cashout(request)
 EOD
+
+
+# Google Play Get Recent Voided Purchases
+cat << 'EOD' | pbcopy
+from liveapp.inapp_purchase.google_play.manager import manager as google_play_manager
+from datetime import datetime, timedelta
+import pytz
+from liveapp.inapp_purchase.google_play.status import GooglePlayVoidedPurchaseType
+refund_time = datetime.now(tz=pytz.utc)
+before_refund_time = refund_time - timedelta(hours=20)
+package_name = "com.superlive.liveapp"
+voided_purchases = google_play_manager.get_voided_purchases(package_name, start_time=before_refund_time, end_time=refund_time, max_results=10, type=GooglePlayVoidedPurchaseType.VOIDED_IN_APP_PURCHASES)
+EOD
