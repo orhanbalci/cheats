@@ -10,3 +10,8 @@ kubectl exec -it <pod_name> -n <namespace> -- mysql -uroot -p
 
 $ pod_name: kubectl get pods -n <namespace> | grep mysql | awk '{print $1}'
 $ namespace: kubectl get namespaces | tail -n +2 | awk '{print $1}'
+
+# Generate API URL from specific izole and open in browser  
+open "https://api-<namespace>.liveapp-dev.com/"
+
+$ namespace: kubectl get namespaces -o custom-columns=":metadata.name" --no-headers | fzf --height=10 --border --prompt="Select namespace: "
