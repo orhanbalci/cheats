@@ -1,0 +1,6 @@
+% personal
+
+# Edit Cheat File
+bash -c 'cd ~/Documents/cheats && hx <selected_file>' 
+
+$ selected_file: cd ~/Documents/cheats && fd -e cheat . | fzf --prompt="Select Cheat File: " --preview --height=70%
