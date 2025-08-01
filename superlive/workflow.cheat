@@ -1,0 +1,15 @@
+
+% superlive, logger
+
+# Navigate to Python project and extract logger names from selected file
+cd ~/workspace/repo/liveapp_root/liveapp_project
+logger_names=$(rg -o 'logging\.getLogger\("([^"]*)"' -r '$1' <selected_file>)
+if [ -n "$logger_names" ]; then
+    selected_logger=$(echo "$logger_names" | fzf --prompt="Select logger name: " --height=40%)
+    echo "$selected_logger" | pbcopy
+    echo "Selected logger '$selected_logger' copied to clipboard!"
+else
+    echo "No logger definitions found in this file"
+fi
+
+$ selected_file: fd -e py -E "__init__.py" . | fzf --prompt="Select Python file: " --preview="rg -n 'logging\.getLogger' {} || echo 'No logger definitions found'" --height=70%
