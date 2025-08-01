@@ -1,0 +1,7 @@
+
+% superlive, postman, handle_google_play_notification
+
+# Send Google Play purchase notification webhook
+echo '{"app": "superlive", "data":{"version": "1.0", "packageName": "com.superlive.liveapp", "eventTimeMillis":"1753724446000",  "voidedPurchaseNotification":{"purchaseToken":"PURCHASE_TOKEN","orderId":"GPA.3397-7707-4506-89856","productType":2,"refundType":1}}}' | xh POST https://<api_endpoint>.liveapp-dev.com/api/webhook/handle_google_play_notification
+
+$ api_endpoint: kubectl get namespaces --no-headers -o custom-columns=":metadata.name" | grep -v "default\|kube-" | sed 's/^/api-/' | fzf --prompt="Select API endpoint: "
